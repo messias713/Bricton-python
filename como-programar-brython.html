@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barra de Navegação e Lista de Vídeos e Imagens</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .videos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .videos img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+</head>
+<h1>Brython list</h1>
+<body>
+    <div class="navbar">
+        <a href="https://sites.google.com/view/manuelcegonha/home">home</a>
+        <a href="https://mcegonha.blogs.sapo.pt/">sapo</a>
+        <a href="https://www.poetrynation.com/collections/natureza-espiritual/">USA poetry</a>
+    </div>
+
+    <div class="videos">
+        <img src="https://i.pinimg.com/originals/ac/2c/fd/ac2cfd67cf4b6c34ff4efdc486a45985.gif" alt="Imagem 1">
+        <img src="https://2.bp.blogspot.com/-jyPORRPY0Bk/Tgd95MEbIgI/AAAAAAAAE1g/hnAhLd0VcIc/s1600/c25d1d3c.gif" alt="Imagem 2">
+        <iframe width="1025" height="200" src="https://www.youtube.com/embed/81WhM9dOcYI" title="ABBA - The Winner Takes It All (Official Lyric Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <script type="text/python">
+        from browser import document, html
+
+        # Seu código Python com Brython pode ser adicionado aqui, se necessário
+        document <= 'seja feliz por favor'
+        document <= html.BR()
+        document <= 23*234
+        document <= html.BR()
+        document <= 'você é capaz'
+    </script>
+
+    <script type="text/javascript">
+        brython(1);
+    </script>
+</body>
+</html>
