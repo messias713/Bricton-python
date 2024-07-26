@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #myImage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .word {
+            position: absolute;
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        #god {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #jesus {
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+        #mary {
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+        }
+        #spiritual {
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo da Imagem</h1>
+    <button onclick="startGame()">Iniciar</button>
+    <img id="myImage" src="https://reflexoesespiritualistas.com.br/wp-content/uploads/2020/02/66992d6f5c8afd194b212886a4822132.gif" alt="Jumping Image">
+    <div class="word" id="god">Deus é pai.</div>
+    <div class="word" id="jesus">Jesus o mestre santo.</div>
+    <div class="word" id="mary">Maria a santa mãe.</div>
+    <div class="word" id="spiritual">Espiritual a ciência divina.</div>
+    <script>
+        let image = document.getElementById("myImage");
+        let positionX = 50;
+        let positionY = 50;
+
+        function jump(event) {
+            switch (event.key) {
+                case "ArrowUp":
+                    positionY -= 10;
+                    break;
+                case "ArrowDown":
+                    positionY += 10;
+                    break;
+                case "ArrowLeft":
+                    positionX -= 10;
+                    break;
+                case "ArrowRight":
+                    positionX += 10;
+                    break;
+            }
+
+            image.style.top = `${positionY}%`;
+            image.style.left = `${positionX}%`;
+
+            checkCollision();
+        }
+
+        function checkCollision() {
+            let imageRect = image.getBoundingClientRect();
+            let words = document.getElementsByClassName("word");
+
+            Array.from(words).forEach(word => {
+                let wordRect = word.getBoundingClientRect();
+
+                if (
+                    imageRect.right > wordRect.left &&
+                    imageRect.left < wordRect.right &&
+                    imageRect.bottom > wordRect.top &&
+                    imageRect.top < wordRect.bottom
+                ) {
+                    word.style.color = getRandomColor();
+                }
+            });
+        }
+
+        function getRandomColor() {
+            let letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function startGame() {
+            document.addEventListener("keydown", jump);
+        }
+    </script>
+</body>
+</html>
