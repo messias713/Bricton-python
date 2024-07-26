@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ativar Link Web com Brython</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+</head>
+<h1>ativar link</h1>
+<body>
+    <a id="meu_link" href="https://www.cbr.ru/eng/search/?text=login">Clique aqui</a>
+
+    <script type="text/python">
+        from browser import document
+
+        def ativar_link(event):
+            document["meu_link"].click()
+
+        document["meu_link"].bind("click", ativar_link)
+        
+        
+    </script>
+</body>
+</html>
