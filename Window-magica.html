@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The opener Property</h2>
+
+<p id="demo">
+Click the button to open a new window that allows you to write in it and upload images.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  const myWindow = window.open("", "", "width=500,height=500");
+  myWindow.document.write("<h1>HELLO!</h1>");
+  
+  const textArea = myWindow.document.createElement("textarea");
+  textArea.style.width = "90%";
+  textArea.style.height = "200px";
+  myWindow.document.body.appendChild(textArea);
+  
+  const fileInput = myWindow.document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.onchange = function() {
+    const file = fileInput.files[0];
+    const img = myWindow.document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    img.style.maxWidth = "100%";
+    myWindow.document.body.appendChild(img);
+  };
+  myWindow.document.body.appendChild(fileInput);
+  
+  const downloadButton = myWindow.document.createElement("button");
+  downloadButton.textContent = "Download Text and Images";
+  downloadButton.onclick = function() {
+    const text = textArea.value;
+    const blob = new Blob([text], { type: "text/plain" });
+    const textUrl = URL.createObjectURL(blob);
+    const textLink = myWindow.document.createElement("a");
+    textLink.href = textUrl;
+    textLink.download = "myTextFile.txt";
+    textLink.click();
+    URL.revokeObjectURL(textUrl);
+    
+    const images = myWindow.document.querySelectorAll("img");
+    images.forEach(function(image, index) {
+      const imgSrc = image.src;
+      const imgName = imgSrc.substring(imgSrc.lastIndexOf('/') + 1);
+      const a = myWindow.document.createElement("a");
+      a.href = imgSrc;
+      a.download = imgName;
+      a.click();
+    });
+  };
+  myWindow.document.body.appendChild(downloadButton);
+  
+  const runButton = myWindow.document.createElement("button");
+  runButton.textContent = "Run Code";
+  runButton.onclick = function() {
+    const code = textArea.value;
+    const script = myWindow.document.createElement("script");
+    script.text = code;
+    myWindow.document.body.appendChild(script);
+  };
+  myWindow.document.body.appendChild(runButton);
+}
+</script>
+
+</body>
+</html>
