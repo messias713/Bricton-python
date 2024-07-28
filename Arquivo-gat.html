@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The opener Property</h2>
+
+<p id="demo">
+Clique no botão para abrir uma nova janela onde você pode enviar arquivos.</p>
+
+<input type="file" id="fileInput" multiple>
+<br>
+<button onclick="myFunction()">Enviar Arquivos</button>
+
+<script>
+function myFunction() {
+  const files = document.getElementById("fileInput").files;
+  const myWindow = window.open("", "", "width=300,height=300");
+  
+  myWindow.document.write('<h1>Arquivos Recebidos</h1>');
+  myWindow.document.write('<ul id="fileList"></ul>');
+  myWindow.document.write('<br><button onclick="downloadFiles()">Baixar Arquivos</button>');
+  
+  const fileList = myWindow.document.getElementById("fileList");
+  for (let i = 0; i < files.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = files[i].name;
+    fileList.appendChild(li);
+  }
+  
+  myWindow.downloadFiles = function() {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const blob = new Blob([e.target.result], { type: file.type });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = file.name;
+        link.click();
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
+}
+</script>
+
+</body>
+</html>
