@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Abrir Nova Janela</title>
+    <script>
+        function abrirNovaJanela() {
+            window.open("pesquisa.html", "Nova Janela", "width=800,height=600");
+        }
+    </script>
+</head>
+<body>
+    <button onclick="abrirNovaJanela()">Abrir Nova Janela</button>
+
+    <h1>Pesquisa Avançada</h1>
+    <form action="https://www.google.com/search" method="get" target="_blank">
+        <input type="text" name="q" placeholder="Digite sua pesquisa">
+        <button type="submit">Pesquisar</button>
+    </form>
+</body>
+</html>
